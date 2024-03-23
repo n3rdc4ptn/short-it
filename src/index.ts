@@ -53,7 +53,13 @@ app.get('/', async (c) => {
 });
 
 app.post('/', async (c) => {
-	const url = await c.req.text();
+	// First check if its a parseable body
+
+	const data = await c.req.parseBody<{ url?: string }>();
+
+	const url = data.url || (await c.req.text());
+	console.log(url);
+
 	var slug = Math.random().toString(36).slice(2);
 
 	// Check if duplicate

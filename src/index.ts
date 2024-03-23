@@ -54,7 +54,12 @@ app.get('/', async (c) => {
 
 app.post('/', async (c) => {
 	const url = await c.req.text();
-	const slug = Math.random().toString(36).slice(2);
+	var slug = Math.random().toString(36).slice(2);
+
+	// Check if duplicate
+	while ((await c.env.SHORT_IT.get(slug)) !== null) {
+		slug = Math.random().toString(36).slice(2);
+	}
 
 	await c.env.SHORT_IT.put(slug, url, {
 		expirationTtl: c.env.DEFAULT_EXPIRATION,

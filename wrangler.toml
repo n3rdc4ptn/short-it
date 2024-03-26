@@ -6,15 +6,15 @@ compatibility_flags = ["nodejs_compat"]
 workers_dev = false
 
 [vars]
-UNKEY_API_ID = "api_3ACFP2xp814sVUw7y2nQGQrQXgnQ"
+UNKEY_API_ID = "%UNKEY_API_ID%"
 DEFAULT_EXPIRATION = 604800 # 7 days
 
 [[routes]]
-pattern = "mine.st"
+pattern = "%CUSTOM_DOMAIN%"
 custom_domain = true
 
 # Bind a KV Namespace. Use KV as persistent storage for small key-value pairs.
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#kv-namespaces
 [[kv_namespaces]]
 binding = "SHORT_IT"
-id = "50bb7687fbf147169a06acf28c74e332"
+id = "%CLOUDFLARE_KV_NAMESPACE_ID%"

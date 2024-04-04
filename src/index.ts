@@ -11,7 +11,12 @@ export type Env = {
 
 const app = new Hono<{ Bindings: Env; Variables: { unkey: UnkeyContext } }>();
 
-app.use(cors());
+app.use(
+	cors({
+		origin: '*',
+		credentials: true,
+	})
+);
 
 app.get('/:slug', async (c) => {
 	const { slug } = c.req.param();

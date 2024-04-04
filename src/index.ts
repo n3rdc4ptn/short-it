@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { UnkeyContext, unkey } from '@unkey/hono';
+import { cors } from 'hono/cors';
 
 export type Env = {
 	UNKEY_API_ID: string;
@@ -9,6 +10,8 @@ export type Env = {
 };
 
 const app = new Hono<{ Bindings: Env; Variables: { unkey: UnkeyContext } }>();
+
+app.use(cors());
 
 app.get('/:slug', async (c) => {
 	const { slug } = c.req.param();

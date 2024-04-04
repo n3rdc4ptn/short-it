@@ -23,10 +23,10 @@ app.get('/:slug', async (c) => {
 	const url = await c.env.SHORT_IT.get(slug);
 
 	if (url === null) {
-		return new Response('Not Found', { status: 404 });
+		return c.text('Not found', { status: 404 });
 	}
 
-	return Response.redirect(url, 307);
+	return c.redirect(url, 307);
 });
 
 // Secured post endpoint
